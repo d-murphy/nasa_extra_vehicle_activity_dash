@@ -1,14 +1,16 @@
 import './App.css'
 import {useEffect, useState} from 'react'
 import axios from 'axios'
+import FilterContainer from './FilterContainer.js'
 
 const App = function (){
   const [originalMissionData, setOriginalMissionData] = useState([])
+  const [filterMissionData, setFilterMissionData] = useState([])
 
   useEffect(() => {
 
     // Dates are excluded from the data source.  Launched dates were acquired for missing values
-    var dateLUT = {
+    const dateLUT = {
       "Gemini VIII": "1966-03-16T00:00:00.000",
       "STS-72": "1996-01-11T00:00:00.000",
       "STS-76": "1996-03-22T00:00:00.000",
@@ -42,7 +44,7 @@ const App = function (){
         
         setOriginalMissionData(
           response.data.map(mission => {
-          var missionMinutes
+          let missionMinutes
           if(mission.duration){
             missionMinutes = parseInt(mission.duration.split(':')[0])*60 + parseInt(mission.duration.split(':')[1]) 
           } else {
@@ -53,24 +55,29 @@ const App = function (){
             mission.vehicle = "STS-72"
           }
 
-          var missionDate = mission.date
-          var missionYear = parseInt(new Date(Date.parse(missionDate)).getFullYear())
+          let missionDate = mission.date
+          let missionYear = parseInt(new Date(Date.parse(missionDate)).getFullYear())
           if(!missionYear){
             missionDate = dateLUT[mission.vehicle]
             missionYear = parseInt(new Date(Date.parse(missionDate)).getFullYear())
           }
           
+          let spacecraft = mission.vehicle.split(/[\s-]+/)[0]
+          spacecraft = spacecraft === 'Incr' ? 'ISS' : spacecraft
+
+          
+          let crewWithoutSpaces = mission.crew.replace(/\s+/g, ' ')
 
           return {...mission,
-            crewWithoutSpaces: mission.crew.replace(/\s+/g, ' '),
-            crewArr: mission.crew.replace(/\s+/g, ' ').trim().split(' '),
+            crewWithoutSpaces: crewWithoutSpaces,
+            crewArr:  crewWithoutSpaces.trim().split(' '),
             timeInMinutes: missionMinutes, 
             year: missionYear,
-            date: missionDate
+            date: missionDate, 
+            spacecraft: spacecraft
           }
         })
       )
-
 
         // var rowPerAstroData = [];
         // updatedMissionData.forEach(mission => {
@@ -126,6 +133,24 @@ const App = function (){
     <div>
       <p>Hello World</p>
       <button onClick={() => console.log(originalMissionData)}>Console log state button</button>
+      <button onClick={() => console.log(filterMissionData)}>Log filtered state</button>
+      <button onClick={() => console.log(originalMissionData
+        .reduce((accumulator,mission)=>{
+          if(!accumulator[mission.spacecraft]){
+            accumulator[mission.spacecraft] = 1
+          } else {
+            accumulator[mission.spacecraft] += 1 
+          }
+          return(accumulator)
+        },{})
+      )}>Console log veh counts</button>
+      <button onClick={() => console.log(originalMissionData
+        .filter(mission => mission.spacecraft === 'Incr')
+        
+        )}>Console log vehs requested</button>
+
+      <p>Custom hook to control filtered state?</p>
+      <FilterContainer setFilterMissionData={setFilterMissionData} originalMissionData={originalMissionData} />
     </div> 
   )
 }
