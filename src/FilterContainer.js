@@ -3,7 +3,7 @@ import CheckboxFilter from './Filters/CheckboxFilter.js'
 
 const FilterContainer = ({originalMissionData, setFilterMissionData}) => {
 
-    const countryArr = ['USA', 'Russia']
+    const countryArr = ['Astronaut', 'Cosmonaut']
     const [countryFilter, setCountryFilter] = useState(countryArr)
 
     const spacecraftArr = ['Apollo', 'Gemini', 'ISS', 'STS', 'Skylab',
@@ -13,7 +13,7 @@ const FilterContainer = ({originalMissionData, setFilterMissionData}) => {
     useEffect(()=>{
         setFilterMissionData(
             originalMissionData
-                .filter(m => countryFilter.includes(m.country) &&
+                .filter(m => countryFilter.includes(m.cosmoOrAstro) &&
                              spacecraftFilter.includes(m.spacecraft)
                 )    
         )
@@ -22,6 +22,7 @@ const FilterContainer = ({originalMissionData, setFilterMissionData}) => {
 
     return(
         <div>
+            <p>Should I make filters dynamic?</p>
             <CheckboxFilter stateArr ={countryFilter} setStateArry={setCountryFilter} labelArr={countryArr}  />
             <CheckboxFilter stateArr ={spacecraftFilter} setStateArry={setSpacecraftFilters} labelArr={spacecraftArr}  />
         </div>

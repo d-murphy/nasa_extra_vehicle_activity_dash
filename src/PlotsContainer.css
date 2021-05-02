@@ -1,0 +1,27 @@
+
+
+.PlotsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+/* add media query here later */
+.CountRow, .SummaryChartRows {
+    display: flex;
+    flex-direction: row;
+}
+
+.CountBox {
+    flex: 1 1 auto;
+    background-color: burlywood;
+    padding: 10px;
+    margin: 10px;
+}
+
+.SummaryChart {
+    flex: 1 1 auto;
+    padding: 10px;
+    margin: 10px;
+    background-color: aquamarine;
+}
+

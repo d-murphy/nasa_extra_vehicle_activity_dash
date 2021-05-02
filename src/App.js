@@ -2,6 +2,7 @@ import './App.css'
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import FilterContainer from './FilterContainer.js'
+import PlotsContainer from './PlotsContainer.js'
 
 const App = function (){
   const [originalMissionData, setOriginalMissionData] = useState([])
@@ -61,10 +62,12 @@ const App = function (){
             missionDate = dateLUT[mission.vehicle]
             missionYear = parseInt(new Date(Date.parse(missionDate)).getFullYear())
           }
-          
+
+         
           let spacecraft = mission.vehicle.split(/[\s-]+/)[0]
           spacecraft = spacecraft === 'Incr' ? 'ISS' : spacecraft
 
+          let cosmoOrAstro = mission.country==="USA" ? 'Astronaut' : 'Cosmonaut'
           
           let crewWithoutSpaces = mission.crew.replace(/\s+/g, ' ')
 
@@ -74,9 +77,11 @@ const App = function (){
             timeInMinutes: missionMinutes, 
             year: missionYear,
             date: missionDate, 
-            spacecraft: spacecraft
+            spacecraft: spacecraft, 
+            cosmoOrAstro: cosmoOrAstro
           }
         })
+       .sort((a, b) => (a.date > b.date) ? 1 : -1)
       )
 
         // var rowPerAstroData = [];
@@ -130,27 +135,43 @@ const App = function (){
 
 
   return(
-    <div>
-      <p>Hello World</p>
-      <button onClick={() => console.log(originalMissionData)}>Console log state button</button>
-      <button onClick={() => console.log(filterMissionData)}>Log filtered state</button>
-      <button onClick={() => console.log(originalMissionData
-        .reduce((accumulator,mission)=>{
-          if(!accumulator[mission.spacecraft]){
-            accumulator[mission.spacecraft] = 1
-          } else {
-            accumulator[mission.spacecraft] += 1 
-          }
-          return(accumulator)
-        },{})
-      )}>Console log veh counts</button>
-      <button onClick={() => console.log(originalMissionData
-        .filter(mission => mission.spacecraft === 'Incr')
-        
-        )}>Console log vehs requested</button>
+    <div className="App">
+      <div className="AppLeftSide">
+        <button onClick={() => console.log(originalMissionData)}>Console log state button</button>
+        <button onClick={() => console.log(filterMissionData)}>Log filtered state</button>
+        <br />
+        <button onClick={() => console.log(originalMissionData
+          .reduce((accumulator,mission)=>{
+            if(!accumulator[mission.spacecraft]){
+              accumulator[mission.spacecraft] = 1
+            } else {
+              accumulator[mission.spacecraft] += 1 
+            }
+            return(accumulator)
+          },{})
+        )}>Console log veh counts</button>
+        <button onClick={() => console.log(originalMissionData
+          .reduce((accumulator,mission)=>{
+            if(!accumulator[mission.year]){
+              accumulator[mission.year] = 1
+            } else {
+              accumulator[mission.year] += 1 
+            }
+            return(accumulator)
+          },{})
+        )}>Console log year counts</button>
+        <br/>
+        <button onClick={() => console.log(originalMissionData
+          .filter(mission => mission.spacecraft === 'Incr')
+          
+          )}>Console log vehs requested</button>
 
-      <p>Custom hook to control filtered state?</p>
-      <FilterContainer setFilterMissionData={setFilterMissionData} originalMissionData={originalMissionData} />
+        <FilterContainer setFilterMissionData={setFilterMissionData} originalMissionData={originalMissionData} />
+        <p>{filterMissionData.length}</p>
+      </div>
+      <div className="AppRightSide">
+          <PlotsContainer filterMissionData={filterMissionData}/>
+      </div>
     </div> 
   )
 }

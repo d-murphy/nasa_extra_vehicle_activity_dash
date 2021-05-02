@@ -1,0 +1,15 @@
+.App {
+  display: flex;
+  max-width: 1000px;
+}
+
+.AppLeftSide{
+  flex: 0 1 250px;
+  display: flex;
+  flex-direction: column;
+  background-color: #DDD;
+}
+
+.AppRightSide{
+  flex: 2 1 auto;
+}
