@@ -15,15 +15,16 @@ const CheckboxFilter = ({stateArr, setStateArry, labelArr}) => {
     return(
         <div>
             {labelArr
-                .map(e => 
+                .map((e, i) => 
                 <div key={e}>
                     <label>{e}
-                        <input onChange={()=> handleInputCheck(e)} type="checkbox" id={e+"Checkbox"} checked={isInputChecked(e)} />                    
+                        <input onChange={()=> handleInputCheck(e)} type="checkbox" id={e+"Checkbox"}
+                         checked={isInputChecked(e)} disabled={true} />                    
                     </label>
                 </div>
                 )
             }
-              {stateArr.map(c => <p key={c}>{c}</p>)} 
+              {/* {stateArr.map(c => <p key={c}>{c}</p>)}  */}
         </div>
     )
 

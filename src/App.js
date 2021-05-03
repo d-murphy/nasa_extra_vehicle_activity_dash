@@ -63,7 +63,8 @@ const App = function (){
             missionYear = parseInt(new Date(Date.parse(missionDate)).getFullYear())
           }
 
-         
+          let purpose = mission.purpose ? mission.purpose.replaceAll("Â","'") : ''
+
           let spacecraft = mission.vehicle.split(/[\s-]+/)[0]
           spacecraft = spacecraft === 'Incr' ? 'ISS' : spacecraft
 
@@ -77,6 +78,7 @@ const App = function (){
             timeInMinutes: missionMinutes, 
             year: missionYear,
             date: missionDate, 
+            purpose: purpose,
             spacecraft: spacecraft, 
             cosmoOrAstro: cosmoOrAstro
           }
