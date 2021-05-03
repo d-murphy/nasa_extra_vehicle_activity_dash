@@ -1,0 +1,19 @@
+#testMouseover {
+    position: absolute;
+    text-align: center;
+    width: 120px;
+    height: auto;
+    padding: 10px;
+    font: 12px;
+    line-height: 1.4em;
+    background-color: white;
+    border-style: solid;
+    opacity: .95;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,.4);
+    pointer-events: none; ;
+  }
+
+  #testMouseover.hidden {
+    display: none;
+  }
