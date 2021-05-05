@@ -138,7 +138,14 @@ const App = function (){
 
   return(
     <div className="App">
+      <div>
+        Spacewalks
+      </div>
+      <div>
+        <hr />
+      </div>
       <div className="AppLeftSide">
+        <h3>USA and Russia, 1965-2013</h3>
         <button onClick={() => console.log(originalMissionData)}>Console log state button</button>
         <button onClick={() => console.log(filterMissionData)}>Log filtered state</button>
         <br />
@@ -168,8 +175,7 @@ const App = function (){
           
           )}>Console log vehs requested</button>
 
-        <FilterContainer setFilterMissionData={setFilterMissionData} originalMissionData={originalMissionData} />
-        <p>{filterMissionData.length}</p>
+        <FilterContainer filterMissionData={filterMissionData} setFilterMissionData={setFilterMissionData} originalMissionData={originalMissionData} />
       </div>
       <div className="AppRightSide">
           <PlotsContainer filterMissionData={filterMissionData}/>

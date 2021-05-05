@@ -23,7 +23,7 @@ const TimelineDotChart = ({filterMissionData}) => {
 
     const {width: widthRs, ref} = useResizeDetector();
 
-    const height = 400 
+    const height = 325 
     const margin = {top: 30, right:40, bottom: 30, left: 30}
     const maxNumInYear = 25  // fixing these for domain instead of re-scaling after each filter
     const minYear = 1965
@@ -50,7 +50,7 @@ const TimelineDotChart = ({filterMissionData}) => {
     useEffect(() =>{
          d3.selectAll('circle')
             .on('mouseover', function(event) {
-                var tt1X = event.pageX - 90
+                var tt1X = event.pageX - 100
                 var tt1Y = event.pageY - 120
                 d3.select("#TimelineDotChartMouseover")
                   .style("left", tt1X + "px")
@@ -79,8 +79,9 @@ const TimelineDotChart = ({filterMissionData}) => {
                                 r={(xScale(1966)-xScale(1965))/2}
                                 fill={d.country==='USA' ? '#5599FF' : '#FF9955'}
                                 message={`<center><b>${d.year}</b></center><br/>
-                                          <b>Mission</b>: ${d.vehicle}<br />
+                                          <b>${d.country} Mission</b>: ${d.vehicle}<br />
                                           <b>Personnel</b>: ${d.crewArr.map((name,i) => (i%2===0 || i===d.crewArr.length-1 ? name + " " : name+", ")).join('')}<br />
+                                          <b>Duration</b>: ${d.duration}<br />
                                           ${d.purpose === undefined ? '' : '<b>Description</b>:  '+ d.purpose}`}
 
 

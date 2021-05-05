@@ -55,21 +55,20 @@ const AstroCountChart = ({filterMissionData}) => {
             .slice(0,10)
 
 
-        console.log("marker", sortedAstroCount)
-
-
     const {width: widthRs, ref} = useResizeDetector();
 
         // consider HEIGHT, even at top of file
-    const height = 250
+    const height = 200
     const margin = {top: 20, right:20, bottom: 20, left: 100}
 
     const xScale = d3
         .scaleLinear()
         .domain([0, d3.max(sortedAstroCount.map(d=>d.numMissions))])
         .range([0, widthRs-margin.right-margin.left])
-
-     const xAxis = d3.axisBottom().scale(xScale)
+        
+     const xAxis = d3.axisBottom()
+        .scale(xScale)
+        .tickFormat(d3.format("d"));
     
     const yScale = d3
         .scaleBand()

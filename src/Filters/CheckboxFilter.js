@@ -1,25 +1,27 @@
-const CheckboxFilter = ({stateArr, setStateArry, labelArr}) => {
+//import './CheckboxFilter.css'
+const CheckboxFilter = ({stateObj, intermediateStateFunc, spacecraftOrAstro}) => {
 
-    function isInputChecked (label) {
-        return (stateArr.includes(label))
-    }
-
-    function handleInputCheck (label) {
-        if(stateArr.includes(label)) {
-            setStateArry (stateArr.filter(e => e!==label))
+    function handleInputCheck (key) {
+        var newState = {...stateObj}
+        let deselect = true
+        if(stateObj[key].checked) {
+            newState[key].checked = false
+            intermediateStateFunc({...newState}, spacecraftOrAstro, deselect)
         } else {
-            setStateArry ([...stateArr,label])
+            newState[key].checked = true
+            deselect = false
+            intermediateStateFunc({...newState}, spacecraftOrAstro, deselect)
         }
     }
-    
+
     return(
         <div>
-            {labelArr
-                .map((e, i) => 
-                <div key={e}>
-                    <label>{e}
-                        <input onChange={()=> handleInputCheck(e)} type="checkbox" id={e+"Checkbox"}
-                         checked={isInputChecked(e)} disabled={true} />                    
+            {Object.keys(stateObj)
+                .map((key) => 
+                <div key={key}>
+                    <label>{key}
+                        <input onChange={()=> handleInputCheck(key)} type="checkbox" id={key+"Checkbox"}
+                         checked={stateObj[key].checked}  />                    
                     </label>
                 </div>
                 )
