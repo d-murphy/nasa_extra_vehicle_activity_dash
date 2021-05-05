@@ -1,4 +1,4 @@
-//import './CheckboxFilter.css'
+import './CheckboxFilter.css'
 const CheckboxFilter = ({stateObj, intermediateStateFunc, spacecraftOrAstro}) => {
 
     function handleInputCheck (key) {
@@ -15,18 +15,22 @@ const CheckboxFilter = ({stateObj, intermediateStateFunc, spacecraftOrAstro}) =>
     }
 
     return(
-        <div>
+        <div className="filterSubset">
             {Object.keys(stateObj)
-                .map((key) => 
-                <div key={key}>
-                    <label>{key}
-                        <input onChange={()=> handleInputCheck(key)} type="checkbox" id={key+"Checkbox"}
-                         checked={stateObj[key].checked}  />                    
-                    </label>
-                </div>
-                )
+                .map((key) => {
+                    let labelName = key === 'ISS' ? "Intl Space Station" : 
+                                        key === 'STS' ? "Space Shuttle" : key
+                    return(
+                        <div key={key}>
+                            <input onChange={()=> handleInputCheck(key)} type="checkbox" id={key+"Checkbox"}
+                                checked={stateObj[key].checked}   />                    
+                            <label for={key+"Checkbox"} id={key+"CheckboxLab"} className={spacecraftOrAstro+"CheckBox"}>
+                                {labelName}
+                            </label>
+                        </div>
+                    )
+                })
             }
-              {/* {stateArr.map(c => <p key={c}>{c}</p>)}  */}
         </div>
     )
 

@@ -1,17 +1,6 @@
 import { useEffect, useState} from 'react'
 import CheckboxFilter from './Filters/CheckboxFilter.js'
 
-// function findUniqueColVals(dataset, column){
-//     let uniqueColVals = dataset
-//     .reduce((accumulator, instance) => {
-//         if(!accumulator.includes(instance[column])){
-//             accumulator.push(instance[column])
-//         }
-//         return(accumulator)
-//     },[])
-//     return(uniqueColVals)
-// }
-
 const FilterContainer = ({originalMissionData, setFilterMissionData}) => {
 
     // declaring state objects for 
@@ -93,11 +82,6 @@ const FilterContainer = ({originalMissionData, setFilterMissionData}) => {
         setFilterMissionData(newFilteredData)
 
     },[cosmoOrAstro, spacecraftFilter, originalMissionData, setFilterMissionData])
-
-
-    useEffect(()=>{
-
-    })
 
     return(
         <div>

@@ -76,8 +76,8 @@ const TimelineDotChart = ({filterMissionData}) => {
                             <circle key={i}
                                 cx={xScale(d.year)}
                                 cy={yScale(d.yearRank)}
-                                r={(xScale(1966)-xScale(1965))/2}
-                                fill={d.country==='USA' ? '#5599FF' : '#FF9955'}
+                                r={(xScale(1966)-xScale(1965))/3}
+                                fill={d.country==='USA' ? 'rgba(37, 37, 216, .5)' : 'rgba(216, 37, 37, .5)'}
                                 message={`<center><b>${d.year}</b></center><br/>
                                           <b>${d.country} Mission</b>: ${d.vehicle}<br />
                                           <b>Personnel</b>: ${d.crewArr.map((name,i) => (i%2===0 || i===d.crewArr.length-1 ? name + " " : name+", ")).join('')}<br />

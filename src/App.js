@@ -67,6 +67,8 @@ const App = function (){
 
           let spacecraft = mission.vehicle.split(/[\s-]+/)[0]
           spacecraft = spacecraft === 'Incr' ? 'ISS' : spacecraft
+//          spacecraft = spacecraft === 'ISS' ? 'International Space Station' : spacecraft
+//          spacecraft = spacecraft === 'STS' ? 'Space Shuttle' : spacecraft
 
           let cosmoOrAstro = mission.country==="USA" ? 'Astronaut' : 'Cosmonaut'
           
@@ -138,50 +140,64 @@ const App = function (){
 
   return(
     <div className="App">
-      <div>
-        Spacewalks
+      <div className="HorizontalFlex">
+        <div className="Title">
+          Spacewalks
+        </div>
+        <div className="TitleHR">
+        </div>
       </div>
-      <div>
-        <hr />
-      </div>
-      <div className="AppLeftSide">
-        <h3>USA and Russia, 1965-2013</h3>
-        <button onClick={() => console.log(originalMissionData)}>Console log state button</button>
-        <button onClick={() => console.log(filterMissionData)}>Log filtered state</button>
-        <br />
-        <button onClick={() => console.log(originalMissionData
-          .reduce((accumulator,mission)=>{
-            if(!accumulator[mission.spacecraft]){
-              accumulator[mission.spacecraft] = 1
-            } else {
-              accumulator[mission.spacecraft] += 1 
-            }
-            return(accumulator)
-          },{})
-        )}>Console log veh counts</button>
-        <button onClick={() => console.log(originalMissionData
-          .reduce((accumulator,mission)=>{
-            if(!accumulator[mission.year]){
-              accumulator[mission.year] = 1
-            } else {
-              accumulator[mission.year] += 1 
-            }
-            return(accumulator)
-          },{})
-        )}>Console log year counts</button>
-        <br/>
-        <button onClick={() => console.log(originalMissionData
-          .filter(mission => mission.spacecraft === 'Incr')
-          
-          )}>Console log vehs requested</button>
-
-        <FilterContainer filterMissionData={filterMissionData} setFilterMissionData={setFilterMissionData} originalMissionData={originalMissionData} />
-      </div>
-      <div className="AppRightSide">
-          <PlotsContainer filterMissionData={filterMissionData}/>
+      <div className="HorizontalFlex">
+        <div className="AppLeftSide">
+          <div className="SubTitle">
+            USA and Russia, 1965-2013
+          </div>
+          <div className="IntroText">
+            Dataset provided by&nbsp;
+            <a href="https://data.nasa.gov/Raw-Data/Extra-vehicular-Activity-EVA-US-and-Russia/9kcy-zwvn">
+              NASA's Open Data Portal</a>
+              &nbsp;showing all activities done by an astronaut or cosmonaut outside a spacecraft beyond the Earth's appreciable atmosphere.
+              <br/><br/><br/>
+              Filter the results with the controls below:   
+          </div>
+          <FilterContainer filterMissionData={filterMissionData} setFilterMissionData={setFilterMissionData} originalMissionData={originalMissionData} />
+        </div>
+        <div className="AppRightSide">
+            <PlotsContainer filterMissionData={filterMissionData}/>
+        </div>
       </div>
     </div> 
   )
 }
 
 export default App
+
+          {/* <button onClick={() => console.log(originalMissionData)}>Console log state button</button>
+          <button onClick={() => console.log(filterMissionData)}>Log filtered state</button>
+          <br />
+          <button onClick={() => console.log(originalMissionData
+            .reduce((accumulator,mission)=>{
+              if(!accumulator[mission.spacecraft]){
+                accumulator[mission.spacecraft] = 1
+              } else {
+                accumulator[mission.spacecraft] += 1 
+              }
+              return(accumulator)
+            },{})
+          )}>Console log veh counts</button>
+          <button onClick={() => console.log(originalMissionData
+            .reduce((accumulator,mission)=>{
+              if(!accumulator[mission.year]){
+                accumulator[mission.year] = 1
+              } else {
+                accumulator[mission.year] += 1 
+              }
+              return(accumulator)
+            },{})
+          )}>Console log year counts</button>
+          <br/>
+          <button onClick={() => console.log(originalMissionData
+            .filter(mission => mission.spacecraft === 'Incr')
+            
+            )}>Console log vehs requested</button>
+ */}
