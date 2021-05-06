@@ -23,7 +23,7 @@ const TimelineDotChart = ({filterMissionData}) => {
 
     const {width: widthRs, ref} = useResizeDetector();
 
-    const height = 325 
+    const height = 275 
     const margin = {top: 30, right:40, bottom: 30, left: 30}
     const maxNumInYear = 25  // fixing these for domain instead of re-scaling after each filter
     const minYear = 1965

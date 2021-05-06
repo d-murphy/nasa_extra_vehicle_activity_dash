@@ -67,8 +67,6 @@ const App = function (){
 
           let spacecraft = mission.vehicle.split(/[\s-]+/)[0]
           spacecraft = spacecraft === 'Incr' ? 'ISS' : spacecraft
-//          spacecraft = spacecraft === 'ISS' ? 'International Space Station' : spacecraft
-//          spacecraft = spacecraft === 'STS' ? 'Space Shuttle' : spacecraft
 
           let cosmoOrAstro = mission.country==="USA" ? 'Astronaut' : 'Cosmonaut'
           

@@ -13,9 +13,6 @@
 
 .CountBox {
     flex: 1 1 auto;
-    background-color: burlywood;
-    padding: 10px;
-    margin: 10px;
 }
 
 .SummaryChart {
