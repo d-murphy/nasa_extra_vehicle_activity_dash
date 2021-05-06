@@ -68,7 +68,7 @@ const TimelineDotChart = ({filterMissionData}) => {
     return(
         <div className="TimelineDotChart" ref={ref}>
             <div id="TimelineDotChartMouseover" className="hidden"></div>
-            <svg viewBox={`0 0 ${widthRs} ${height}`}>
+            <svg viewBox={`0 0 ${widthRs===undefined ? 0 : widthRs} ${height}`}>
 
                 <g >
                     {TimelineDotData.map((d,i) => {
@@ -94,7 +94,7 @@ const TimelineDotChart = ({filterMissionData}) => {
                     <g ref={yAxisRef} transform={`translate(${margin.left} 0)`}/>
                     <g>
                         <text transform={`translate(${margin.left+2} ${margin.top}) rotate(90)`}
-                         class="yAxisLabel"># of Missions</text>
+                         className="yAxisLabel"># of Missions</text>
                     </g>
                 </g>
             </svg>            

@@ -24,7 +24,7 @@ const CheckboxFilter = ({stateObj, intermediateStateFunc, spacecraftOrAstro}) =>
                         <div key={key}>
                             <input onChange={()=> handleInputCheck(key)} type="checkbox" id={key+"Checkbox"}
                                 checked={stateObj[key].checked}   />                    
-                            <label for={key+"Checkbox"} id={key+"CheckboxLab"} className={spacecraftOrAstro+"CheckBox"}>
+                            <label htmlFor={key+"Checkbox"} id={key+"CheckboxLab"} className={spacecraftOrAstro+"CheckBox"}>
                                 {labelName}
                             </label>
                         </div>

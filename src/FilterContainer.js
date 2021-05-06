@@ -84,7 +84,7 @@ const FilterContainer = ({originalMissionData, setFilterMissionData}) => {
     },[cosmoOrAstro, spacecraftFilter, originalMissionData, setFilterMissionData])
 
     return(
-        <div>
+        <div className="filterContainer">
             <br />
             <CheckboxFilter stateObj ={cosmoOrAstro} intermediateStateFunc={updateFilterState} 
                             spacecraftOrAstro="cosmoOrAstro"  />

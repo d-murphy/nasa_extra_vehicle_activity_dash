@@ -1,23 +1,20 @@
 import * as d3 from 'd3'
 import { useResizeDetector } from 'react-resize-detector'
 import { useEffect, useRef } from 'react'
-import {spreadToRowPerAstro, calcCountPerAstro} from '../Util'
+import {getSpacecraftCounts} from '../Util'
 import './SummaryChart.css'
 
-const AstroCountChart = ({filterMissionData}) => {
+const SpacecraftCountChart = ({filterMissionData}) => {
 
     const xAxisRef = useRef(null)
     const yAxisRef = useRef(null)
 
-    let TimelineDotData = filterMissionData
+    let SpacecraftCounts = getSpacecraftCounts(filterMissionData)
 
-    var rowPerAstroData = spreadToRowPerAstro(TimelineDotData)
-    var ReducedAstroData = calcCountPerAstro(rowPerAstroData)
+    SpacecraftCounts = Object.values(SpacecraftCounts)
 
-    const AstroCount = Object.values(ReducedAstroData)
-    const sortedAstroCount = AstroCount
-        .sort((a,b) => (b.numMissions -a.numMissions))
-        .slice(0,10)
+    SpacecraftCounts = SpacecraftCounts
+        .sort((a,b) => (b.spacecraftCount -a.spacecraftCount))
 
     const {width: widthRs, ref} = useResizeDetector();
 
@@ -26,7 +23,7 @@ const AstroCountChart = ({filterMissionData}) => {
 
     const xScale = d3
         .scaleLinear()
-        .domain([0, d3.max(sortedAstroCount.map(d=>d.numMissions))])
+        .domain([0, d3.max(SpacecraftCounts.map(d=>d.spacecraftCount))])
         .range([0, widthRs-margin.right-margin.left])
     
     const xAxis = d3.axisBottom()
@@ -36,7 +33,7 @@ const AstroCountChart = ({filterMissionData}) => {
 
     const yScale = d3
         .scaleBand()
-        .domain(sortedAstroCount.map(d => d.astroName))
+        .domain(SpacecraftCounts.map(d => d.spacecraft))
         .range([margin.top, height-margin.bottom])
         .paddingInner(0.1)
         .paddingOuter(0.5)
@@ -48,39 +45,40 @@ const AstroCountChart = ({filterMissionData}) => {
     },[xAxis,yAxis])
 
     useEffect(() =>{
+    
          d3.selectAll('rect')
             .on('mouseover', function(event) {
                 var tt1X = event.pageX - 90
                 var tt1Y = event.pageY - 100
-                d3.select("#AstroCountChartMouseover")
+                d3.select("#SpacecraftCountChartMouseover")
                   .style("left", tt1X + "px")
                   .style("top", tt1Y + "px")
                   .html(event.srcElement.attributes.message.nodeValue)
                   .classed("hidden", false)
             })
             .on("mouseout", function() {
-                d3.select("#AstroCountChartMouseover").classed("hidden", true)
+                d3.select("#SpacecraftCountChartMouseover").classed("hidden", true)
             })
     })
 
     return(
-        <div className="AstroCountChart" ref={ref}>
-            <div id="AstroCountChartMouseover" className="hidden"></div>
+        <div className="SpacecraftCountChart" ref={ref}>
+            <div id="SpacecraftCountChartMouseover" className="hidden"></div>
             <svg viewBox={`0 0 ${widthRs} ${height}`}>
 
                 <g >
-                    {sortedAstroCount.map((d,i) => {
+                    {SpacecraftCounts.map((d,i) => {
                         return(
                             <rect key={i}
                                 x={margin.left}
-                                y={yScale(d.astroName)}
+                                y={yScale(d.spacecraft)}
                                 height={yScale.bandwidth()}
-                                width={xScale(d.numMissions)}
-                                fill= {d.astroCountry==='USA' ? 'rgba(37, 37, 216, .5)' : 'rgba(216, 37, 37, .5)'}
-                                message={`<center><b>${d.astroName}</b><br/><br/>
-                                          <b># of Spacewalks</b>: ${d.numMissions}<br />
-                                          <b>Hours in Space</b>: ${Math.round(d.totalMinsInSpace/60)}<br />
-                                          <b>Years</b>: ${d.yearsActiveMax===d.yearsActiveMin ? d.yearsActiveMin : `${d.yearsActiveMin}-${d.yearsActiveMax}`}
+                                width={xScale(d.spacecraftCount)}
+                                fill= {d.country==='USA' ? 'rgba(37, 37, 216, .5)' : 
+                                        d.country==='Russia' ? 'rgba(216, 37, 37, .5)' : 'rgba(114, 28, 114, 0.3)'}
+                                message={`<center><b>${d.spacecraft}</b><br/><br/>
+                                          <b># of Spacewalks</b>: ${d.spacecraftCount}<br />
+                                          <b>Spacewalk Years</b>: ${d.spacewalkYearsMax===d.spacewalkYearsMin ? d.spacewalkYearsMin : `${d.spacewalkYearsMin}-${d.spacewalkYearsMax}`}
                                           </center>`}
 
 
@@ -96,8 +94,8 @@ const AstroCountChart = ({filterMissionData}) => {
                          className="yAxisLabel"># of Missions</text>
                     </g>
                     <g>
-                        <text transform={`translate(${widthRs-widthRs*.72} ${margin.top-8}) `}
-                         className="title">Individual Spacewalk Count</text>
+                        <text transform={`translate(${widthRs-widthRs*.7} ${margin.top-8}) `}
+                         className="title">Spacecraft Spacewalk Count</text>
                     </g>
                 </g>
             </svg>            
@@ -105,4 +103,4 @@ const AstroCountChart = ({filterMissionData}) => {
     )
     
 }
-export default AstroCountChart
+export default SpacecraftCountChart

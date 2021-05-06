@@ -1,0 +1,26 @@
+#AstroCountChartMouseover, 
+#SpacecraftCountChartMouseover {
+    position: absolute;
+    text-align: left;
+    width: 140px;
+    height: auto;
+    padding: 10px;
+    font-size: small;
+    line-height: 1.1em;
+    background-color: white;
+    border-style: solid;
+    opacity: .9;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,.4);
+    pointer-events: none; ;
+  }
+
+  #AstroCountChartMouseover.hidden, 
+  #SpacecraftCountChartMouseover.hidden {
+    display: none;
+  }
+
+  .yAxisLabel {
+      font-size: small;
+  }
+

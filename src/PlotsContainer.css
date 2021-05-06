@@ -15,10 +15,26 @@
     flex: 1 1 auto;
 }
 
+.SummaryChartRows {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    margin: 0px 5px 0px 5px;
+    flex: 2 1 auto;
+}
+
 .SummaryChart {
-    flex: 1 1 auto;
+    flex: 2 1 auto;
     padding: 10px;
     margin: 10px;
-    background-color: aquamarine;
 }
+
+@media screen and (max-width: 600px) {
+    .CountRow {
+        flex-direction: column;
+    }
+    .SummaryChartRows {
+        flex-direction: column;    
+    }
+}
+
 

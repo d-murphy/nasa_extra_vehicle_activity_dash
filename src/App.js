@@ -86,66 +86,22 @@ const App = function (){
        .sort((a, b) => (a.date > b.date) ? 1 : -1)
       )
 
-        // var rowPerAstroData = [];
-        // updatedMissionData.forEach(mission => {
-        //   var AstroName = "";
-        //   var CrewMemberId
-        //   var crewMembersToFind = mission.crewArr.length/2
-        //   for(let i=0; i<crewMembersToFind;i++){
-        //     AstroName = mission.crewArr[i*2] + " " + mission.crewArr[i*2+1];
-        //     CrewMemberId = i;
-        //     rowPerAstroData.push({
-        //       ...mission, 
-        //       astroName: AstroName,
-        //       crewMemberId: CrewMemberId
-        //     })  
-        //   }
-        // })
-
-        // var AstroCount = rowPerAstroData
-        // .reduce((accumulator, astroObs)=>{
-        //   if(!accumulator[astroObs.astroName]){
-        //     accumulator[astroObs.astroName] = {
-        //       astroName: astroObs.astroName,
-        //       astroCountry: astroObs.country,
-        //       numMissions: 1,
-        //       totalMinsInSpace: astroObs.timeInMinutes, 
-        //       yearsActiveMin: astroObs.year,
-        //       yearsActiveMax: astroObs.year
-        //     }
-        //   } else {
-        //     accumulator[astroObs.astroName].numMissions += 1
-        //     accumulator[astroObs.astroName].totalMinsInSpace += astroObs.timeInMinutes
-        //     accumulator[astroObs.astroName].yearsActiveMin = 
-        //       Math.min(accumulator[astroObs.astroName].yearsActiveMin,
-        //         astroObs.year)
-        //     accumulator[astroObs.astroName].yearsActiveMax = 
-        //     Math.max(accumulator[astroObs.astroName].yearsActiveMax,
-        //       astroObs.year)
-        //     }
-        //   return(accumulator)
-        // },{})
-
-        // console.log(AstroCount)
       })
       .catch(error => {
         console.log(error)
       })
   }, [])
 
-  //document.getElementById("txt").value.split("\t").length;
-
-
   return(
     <div className="App">
-      <div className="HorizontalFlex">
+      <div className="HorizontalFlexTitle">
         <div className="Title">
           Spacewalks
         </div>
         <div className="TitleHR">
         </div>
       </div>
-      <div className="HorizontalFlex">
+      <div className="HorizontalFlexContent">
         <div className="AppLeftSide">
           <div className="SubTitle">
             USA and Russia, 1965-2013
@@ -170,32 +126,3 @@ const App = function (){
 
 export default App
 
-          {/* <button onClick={() => console.log(originalMissionData)}>Console log state button</button>
-          <button onClick={() => console.log(filterMissionData)}>Log filtered state</button>
-          <br />
-          <button onClick={() => console.log(originalMissionData
-            .reduce((accumulator,mission)=>{
-              if(!accumulator[mission.spacecraft]){
-                accumulator[mission.spacecraft] = 1
-              } else {
-                accumulator[mission.spacecraft] += 1 
-              }
-              return(accumulator)
-            },{})
-          )}>Console log veh counts</button>
-          <button onClick={() => console.log(originalMissionData
-            .reduce((accumulator,mission)=>{
-              if(!accumulator[mission.year]){
-                accumulator[mission.year] = 1
-              } else {
-                accumulator[mission.year] += 1 
-              }
-              return(accumulator)
-            },{})
-          )}>Console log year counts</button>
-          <br/>
-          <button onClick={() => console.log(originalMissionData
-            .filter(mission => mission.spacecraft === 'Incr')
-            
-            )}>Console log vehs requested</button>
- */}

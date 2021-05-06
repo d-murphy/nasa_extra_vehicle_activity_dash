@@ -9,7 +9,7 @@ const NumVehicles = ({filterMissionData}) => {
             }
             return(accumulator)
         },{})
-    console.log(vehicles)
+
     let numberOfVehicles = Object.keys(vehicles).length
     return(
         <div className="CountContainer">

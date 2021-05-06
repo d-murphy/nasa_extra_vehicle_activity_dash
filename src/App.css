@@ -1,4 +1,4 @@
-.App, .HorizontalFlex {
+.App, .HorizontalFlexTitle, .HorizontalFlexContent {
   display: flex;
 }
 
@@ -40,4 +40,19 @@
 
 .AppRightSide{
   flex: 2 1 auto;
+}
+
+@media screen and (max-width: 600px) {
+  .HorizontalFlexContent {
+    flex-direction: column;
+  }
+
+  .TitleHR{
+    flex: 1 1 auto;
+  }
+
+  .filterContainer {
+    margin-bottom: 10px;
+  }
+  
 }

@@ -9,7 +9,6 @@ const NumHours = ({filterMissionData}) => {
     let astroCountsArr = Object.values(astroCounts)
 
     let minutesInSpace = 0
-    console.log(astroCountsArr)
     astroCountsArr
         .forEach(m => {
             minutesInSpace += parseInt(m.totalMinsInSpace)

@@ -1,6 +1,7 @@
 
-import TimelineDotChart from './Plots/TimelineDotChart.js'
+import TimelineDotChart from './Plots/TimelineDotChart'
 import AstroCountChart from './Plots/AstroCountChart'
+import SpacecraftCountChart from './Plots/SpacecraftCountChart'
 import NumSpacewalks from './Plots/NumSpacewalks'
 import NumAstro from './Plots/NumAstro'
 import NumHours from './Plots/NumHours'
@@ -23,7 +24,9 @@ const PlotsContainer = ({filterMissionData}) => {
                 <div className="SummaryChart">
                     <AstroCountChart filterMissionData={filterMissionData}/>
                 </div>
-                <div className="SummaryChart">chart 3</div>
+                <div className="SummaryChart">
+                    <SpacecraftCountChart filterMissionData={filterMissionData} />
+                </div>
             </div>
         </div>
     )

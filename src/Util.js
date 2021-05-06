@@ -44,4 +44,33 @@ const calcCountPerAstro = function(rowPerAstroData){
     return(returnObject)
 }
 
-export {calcCountPerAstro, spreadToRowPerAstro}
+const getSpacecraftCounts = function(missionData) {
+    let returnObject = missionData
+    .reduce((accumulator, mission) => {
+        if(!accumulator[mission.spacecraft]){
+            accumulator[mission.spacecraft] = {
+                spacecraft: mission.spacecraft === "STS" ? "Space Shuttle" : 
+                    mission.spacecraft === "ISS" ? "Intl Space Station" : mission.spacecraft,
+                spacecraftCount: 1,
+                spacewalkYearsMin: mission.year,
+                spacewalkYearsMax: mission.year, 
+                country: mission.country,
+                spacewalkMinutes: mission.timeInMinutes
+            }
+        } else {
+            accumulator[mission.spacecraft].spacecraftCount += 1
+            accumulator[mission.spacecraft].spacewalkYearsMin = mission.year < accumulator[mission.spacecraft].spacewalkYearsMin ? 
+                mission.year : accumulator[mission.spacecraft].spacewalkYearsMin
+            accumulator[mission.spacecraft].spacewalkYearsMax = mission.year > accumulator[mission.spacecraft].spacewalkYearsMax ? 
+                mission.year : accumulator[mission.spacecraft].spacewalkYearsMax 
+            accumulator[mission.spacecraft].country = mission.country === accumulator[mission.spacecraft].country ? 
+                accumulator[mission.spacecraft].country : "USA and Russia"
+            accumulator[mission.spacecraft].spacewalkMinutes += mission.timeInMinutes
+        }
+    return(accumulator)
+    },{})
+    return(returnObject)
+}
+
+
+export {calcCountPerAstro, spreadToRowPerAstro, getSpacecraftCounts}
