@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/spacewalk-dashboard/static/css/main.cc777e1d.chunk.css",
+    "main.js": "/spacewalk-dashboard/static/js/main.43ba74d8.chunk.js",
+    "main.js.map": "/spacewalk-dashboard/static/js/main.43ba74d8.chunk.js.map",
+    "runtime-main.js": "/spacewalk-dashboard/static/js/runtime-main.1b473558.js",
+    "runtime-main.js.map": "/spacewalk-dashboard/static/js/runtime-main.1b473558.js.map",
+    "static/js/2.4c8073dc.chunk.js": "/spacewalk-dashboard/static/js/2.4c8073dc.chunk.js",
+    "static/js/2.4c8073dc.chunk.js.map": "/spacewalk-dashboard/static/js/2.4c8073dc.chunk.js.map",
+    "index.html": "/spacewalk-dashboard/index.html",
+    "static/css/main.cc777e1d.chunk.css.map": "/spacewalk-dashboard/static/css/main.cc777e1d.chunk.css.map",
+    "static/js/2.4c8073dc.chunk.js.LICENSE.txt": "/spacewalk-dashboard/static/js/2.4c8073dc.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1b473558.js",
+    "static/js/2.4c8073dc.chunk.js",
+    "static/css/main.cc777e1d.chunk.css",
+    "static/js/main.43ba74d8.chunk.js"
+  ]
+}
